@@ -7,6 +7,7 @@ Auto-generated from all feature plans. Last updated: 2026-03-02
 - PostgreSQL (002-task-management)
 - pytest, pytest-asyncio, httpx (002-task-management)
 - Alembic for database migrations (002-task-management)
+- Python 3.11 + FastAPI, SQLAlchemy, Pydantic, Alembic (003-board-management)
 
 - (001-user-auth)
 
@@ -57,10 +58,10 @@ pytest tests/unit/test_task_service.py
 - 80% test coverage target
 
 ## Recent Changes
+- 003-board-management: Added Python 3.11 + FastAPI, SQLAlchemy, Pydantic, Alembic
 - 002-task-management: Added Python 3.11 + FastAPI, SQLAlchemy, Pydantic, pytest, Alembic
 - 002-task-management: Task management with CRUD operations, status management, user ownership
 
-- 001-user-auth: Added
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->
