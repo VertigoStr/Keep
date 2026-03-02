@@ -58,9 +58,9 @@ pytest tests/unit/test_task_service.py
 - 80% test coverage target
 
 ## Recent Changes
+- 004-task-board-binding: Added Python 3.11 + FastAPI, SQLAlchemy, Pydantic, Alembic
 - 003-board-management: Added Python 3.11 + FastAPI, SQLAlchemy, Pydantic, Alembic
 - 002-task-management: Added Python 3.11 + FastAPI, SQLAlchemy, Pydantic, pytest, Alembic
-- 002-task-management: Task management with CRUD operations, status management, user ownership
 
 
 <!-- MANUAL ADDITIONS START -->
