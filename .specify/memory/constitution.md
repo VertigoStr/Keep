@@ -1,50 +1,72 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+SYNC IMPACT REPORT
+==================
+Version change: 1.1.1 → 1.2.0
+Bump rationale: MINOR - Added new Governance section with amendment procedure, versioning policy, and compliance review expectations
+
+Modified principles: None
+Added sections:
+  - Governance (amendment procedure, versioning policy, compliance review)
+Removed sections: None
+
+Templates requiring updates:
+  ✅ .specify/templates/plan-template.md - Constitution Check section aligns with principles
+  ✅ .specify/templates/spec-template.md - Requirements section aligns with quality standards
+  ✅ .specify/templates/tasks-template.md - Task categorization reflects testing discipline
+  ⚠ .specify/templates/commands/ - Directory not found, no command files to verify
+
+Follow-up TODOs: None
+-->
+
+# Keep Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Технические ограничения
+1) Язык - python 3.11
+2) Frameworks - FastApi
+3) Следование PEP8
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**Рациональ**: Определение единого технологического стека обеспечивает согласованность разработки, упрощает поддержку и позволяет команде сосредоточиться на бизнес-логике вместо выбора технологий.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Стандарты качества кода
+1) Solid принципы, DRY, KISS
+2) Стандарт наименования - snake_case
+3) Максимальная длина функции и классов до 120 символов
+4) Описывать документацию к каждому методу и классу
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Рациональ**: SOLID, DRY и KISS принципы обеспечивают поддерживаемость и расширяемость кода. Единый стиль наименования (snake_case) соответствует PEP8 и улучшает читаемость. Ограничение длины строк до 120 символов обеспечивает читаемость на различных экранах. Документация обязательна для понимания контрактов методов и классов.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Тестирование
+1) Обязательно писать unit тесты на каждую функциональность
+2) Добиться покрытия тестами 80% кода
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Рациональ**: Unit тесты обеспечивают быстрое обнаружение регрессий и документируют ожидаемое поведение. Покрытие 80% является балансом между качеством и эффективностью разработки.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Безопасность
+1) Хранить секреты в переменных окружения
+2) Один коммит == одна задача
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+**Рациональ**: Переменные окружения предотвращают попадание секретов в систему контроля версий. Правило "один коммит - одна задача" упрощает code review, отладку и возможность отката изменений.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### Процедура внесения изменений
+1) Любое изменение конституции должно быть документировано с указанием причины изменения
+2) Изменения должны быть согласованы с командой разработки
+3) После внесения изменений необходимо обновить версию конституции согласно политике версионирования
+4) Все изменения должны быть синхронизированы с зависимыми артефактами (шаблоны, документация)
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### Политика версионирования
+Версия конституции следует семантическому версионированию (MAJOR.MINOR.PATCH):
+- **MAJOR**: Обратно несовместимые изменения, удаление или переопределение принципов
+- **MINOR**: Добавление новых принципов или секций, существенное расширение руководств
+- **PATCH**: Уточнения, исправления формулировок, некритические изменения
+
+### Проверка соответствия
+1) Все pull requests и code review должны включать проверку соответствия конституции
+2) Сложность решений должна быть обоснована
+3) Нарушения принципов должны быть задокументированы с объяснением причин
+4) Регулярные обзоры соответствия должны проводиться не реже одного раза в квартал
+
+**Version**: 1.2.0 | **Ratified**: 2026-03-02 | **Last Amended**: 2026-03-02
