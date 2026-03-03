@@ -14,6 +14,8 @@ from src.models.user import User
 from src.models.session import Session
 from src.models.failed_login import FailedLoginAttempt
 from src.models.task import Task
+from src.models.board import Board
+from src.models.column import Column
 from src.config import get_settings
 
 settings = get_settings()
@@ -91,3 +93,19 @@ def sample_login_data() -> dict:
         "email": "test@example.com",
         "password": "SecurePass123!"
     }
+
+
+@pytest.fixture
+async def auth_headers(client: AsyncClient, sample_user_data: dict) -> dict:
+    """Create authenticated user and return auth headers."""
+    # Register user
+    await client.post("/api/v1/auth/register", json=sample_user_data)
+    
+    # Login to get token
+    login_response = await client.post(
+        "/api/v1/auth/login",
+        json={"email": sample_user_data["email"], "password": sample_user_data["password"]},
+    )
+    token = login_response.json()["token"]
+    
+    return {"Cookie": f"session_token={token}"}

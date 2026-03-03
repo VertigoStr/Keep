@@ -4,6 +4,7 @@ from enum import Enum
 from sqlalchemy import Column, String, Date, ForeignKey
 from sqlalchemy.orm import relationship
 from src.models import BaseModel
+from typing import Optional
 
 
 class TaskStatus(str, Enum):
@@ -26,9 +27,11 @@ class Task(BaseModel):
     description = Column(String(5000), nullable=False, default="")
     due_date = Column(Date, nullable=False, index=True)
     status = Column(String(50), nullable=False, default=TaskStatus.TODO, index=True)
+    column_id = Column(String, ForeignKey("columns.id", ondelete="SET NULL"), nullable=True, index=True)
 
-    # Relationship
+    # Relationships
     user = relationship("User", backref="tasks")
+    column: Optional["Column"] = relationship("Column", backref="tasks")
 
     def __repr__(self) -> str:
         """String representation of Task."""
