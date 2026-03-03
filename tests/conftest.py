@@ -10,6 +10,10 @@ from sqlalchemy.pool import StaticPool
 from src.main import app
 from src.database import get_db
 from src.models import Base
+from src.models.user import User
+from src.models.session import Session
+from src.models.failed_login import FailedLoginAttempt
+from src.models.task import Task
 from src.config import get_settings
 
 settings = get_settings()

@@ -55,6 +55,20 @@ class TooManyAttemptsError(AppError):
         super().__init__(message, "too_many_attempts", status.HTTP_429_TOO_MANY_REQUESTS)
 
 
+class NotFoundError(AppError):
+    """Not found error."""
+
+    def __init__(self, message: str = "Resource not found"):
+        super().__init__(message, "not_found", status.HTTP_404_NOT_FOUND)
+
+
+class ForbiddenError(AppError):
+    """Forbidden error."""
+
+    def __init__(self, message: str = "You do not have permission to access this resource"):
+        super().__init__(message, "forbidden", status.HTTP_403_FORBIDDEN)
+
+
 async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
     """Handle application errors."""
     logger.error(f"App error: {exc.error_code} - {exc.message}")
@@ -129,6 +143,8 @@ __all__ = [
     "InvalidCredentialsError",
     "EmailExistsError",
     "TooManyAttemptsError",
+    "NotFoundError",
+    "ForbiddenError",
     "app_error_handler",
     "validation_error_handler",
     "integrity_error_handler",
