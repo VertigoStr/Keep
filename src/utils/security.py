@@ -81,8 +81,8 @@ class SecurityUtils:
         return hashlib.sha256(token.encode()).hexdigest()
 
 
-# HTTP Bearer security scheme
-security = HTTPBearer()
+# HTTP Bearer security scheme (optional to allow cookie-based auth)
+security = HTTPBearer(auto_error=False)
 
 
 async def get_current_user(

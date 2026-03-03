@@ -40,6 +40,14 @@ class RateLimitService:
         await self.failed_login_repo.create_attempt(email, ip_address, user_agent)
         return True
 
+    async def reset_rate_limit(self, email: str) -> None:
+        """Reset rate limit for a specific email after successful login.
+
+        Args:
+            email: Email address to reset rate limit for
+        """
+        await self.failed_login_repo.delete_attempts_by_email(email)
+
     async def count_recent_attempts(self, email: str, minutes: int = 15) -> int:
         """Count recent failed login attempts.
 

@@ -77,5 +77,21 @@ class FailedLoginAttemptRepository:
         await self.session.commit()
         return result.rowcount
 
+    async def delete_attempts_by_email(self, email: str) -> int:
+        """Delete all failed login attempts for a specific email.
+
+        Args:
+            email: Email address to delete attempts for
+
+        Returns:
+            Number of deleted records
+        """
+        result = await self.session.execute(
+            delete(FailedLoginAttempt)
+            .where(FailedLoginAttempt.email == email.lower())
+        )
+        await self.session.commit()
+        return result.rowcount
+
 
 __all__ = ["FailedLoginAttemptRepository"]

@@ -71,6 +71,7 @@ class TestAuthService:
         mock_security_utils = MagicMock()
         mock_security_utils.create_token = MagicMock(return_value="jwt_token")
         mock_security_utils.hash_token = MagicMock(return_value="token_hash")
+        mock_security_utils.expiration_seconds = 86400  # 24 hours in seconds
         
         # Create service with mocked dependencies
         auth_service = AuthService.__new__(AuthService)

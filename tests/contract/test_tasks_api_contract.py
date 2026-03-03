@@ -79,7 +79,7 @@ async def test_post_tasks_validation_error_contract(
     )
 
     # Verify response status
-    assert response.status_code == 400
+    assert response.status_code == 422
 
     # Verify error response structure
     data = response.json()

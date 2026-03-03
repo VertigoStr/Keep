@@ -23,7 +23,7 @@ class ValidationError(AppError):
     """Validation error."""
 
     def __init__(self, message: str, details: dict = None):
-        super().__init__(message, "validation_error", status.HTTP_400_BAD_REQUEST)
+        super().__init__(message, "validation_error", status.HTTP_422_UNPROCESSABLE_ENTITY)
         self.details = details
 
 
@@ -81,9 +81,16 @@ async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
     if hasattr(exc, "details") and exc.details:
         response_data["details"] = exc.details
     
+    headers = {}
+    # Add Retry-After header for rate limiting errors
+    if exc.error_code == "too_many_attempts":
+        # 15 minutes = 900 seconds
+        headers["Retry-After"] = "900"
+    
     return JSONResponse(
         status_code=exc.status_code,
-        content=response_data
+        content=response_data,
+        headers=headers
     )
 
 
@@ -91,12 +98,31 @@ async def validation_error_handler(request: Request, exc: RequestValidationError
     """Handle FastAPI validation errors."""
     logger.error(f"Validation error: {exc.errors()}")
     
+    # Format details to ensure they are JSON serializable
+    details = []
+    for error in exc.errors():
+        detail = {
+            "type": error.get("type"),
+            "loc": error.get("loc"),
+            "msg": error.get("msg"),
+        }
+        if "input" in error:
+            input_val = error["input"]
+            # Handle non-serializable input values
+            try:
+                import json
+                json.dumps(input_val)
+                detail["input"] = input_val
+            except (TypeError, ValueError):
+                detail["input"] = str(input_val)
+        details.append(detail)
+    
     return JSONResponse(
-        status_code=status.HTTP_400_BAD_REQUEST,
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         content={
             "error": "validation_error",
             "message": "Request validation failed",
-            "details": exc.errors()
+            "details": details
         }
     )
 

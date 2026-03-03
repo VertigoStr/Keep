@@ -25,7 +25,7 @@ router = APIRouter()
     response_model=UserResponse,
     status_code=status.HTTP_201_CREATED,
     responses={
-        400: {"model": ErrorResponse, "description": "Validation error"},
+        422: {"model": ErrorResponse, "description": "Validation error"},
         409: {"model": ErrorResponse, "description": "Email already exists"}
     }
 )
@@ -59,7 +59,7 @@ async def register(
     response_model=LoginResponse,
     status_code=status.HTTP_200_OK,
     responses={
-        400: {"model": ErrorResponse, "description": "Validation error"},
+        422: {"model": ErrorResponse, "description": "Validation error"},
         401: {"model": ErrorResponse, "description": "Invalid credentials"},
         429: {"model": ErrorResponse, "description": "Too many attempts"}
     }
@@ -113,7 +113,7 @@ async def login(
         max_age=86400  # 24 hours
     )
 
-    return LoginResponse(user=UserResponse.model_validate(user))
+    return LoginResponse(user=UserResponse.model_validate(user), token=token)
 
 
 @router.post(
@@ -127,7 +127,6 @@ async def login(
 async def logout(
     request: Request,
     response: Response,
-    current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ) -> LogoutResponse:
     """Logout the current user and terminate their session.
@@ -135,7 +134,6 @@ async def logout(
     Args:
         request: FastAPI request object
         response: FastAPI response object
-        current_user: Current authenticated user
         db: Database session
 
     Returns:
@@ -147,10 +145,12 @@ async def logout(
     # Get token from cookie
     token = request.cookies.get("session_token")
     
-    if token:
-        # Delete session
-        auth_service = AuthService(db)
-        await auth_service.logout_user(token)
+    if not token:
+        raise UnauthorizedError()
+    
+    # Delete session (will raise UnauthorizedError if session not found)
+    auth_service = AuthService(db)
+    await auth_service.logout_user(token)
     
     # Clear cookie
     response.delete_cookie(

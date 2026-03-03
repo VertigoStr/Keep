@@ -115,7 +115,7 @@ async def test_create_task_validation_error_invalid_status(
         cookies={"session_token": token},
     )
 
-    assert response.status_code == 400
+    assert response.status_code == 422
     assert response.json()["error"] == "validation_error"
 
 
