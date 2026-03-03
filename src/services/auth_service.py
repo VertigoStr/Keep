@@ -6,7 +6,7 @@ from src.repositories.user_repository import UserRepository
 from src.repositories.session_repository import SessionRepository
 from src.services.password_service import PasswordService
 from src.utils.security import SecurityUtils
-from src.middleware.error_handler import EmailExistsError, InvalidCredentialsError
+from src.middleware.error_handler import EmailExistsError, InvalidCredentialsError, UnauthorizedError
 from src.models.user import User
 from src.models.session import Session
 
@@ -75,6 +75,11 @@ class AuthService:
         token_hash = self.security_utils.hash_token(token)
         expires_at = datetime.utcnow() + timedelta(seconds=self.security_utils.expiration_seconds)
         await self.session_repository.create_session(user.id, token_hash, expires_at)
+
+        # Reset rate limit after successful login
+        from src.services.rate_limit_service import RateLimitService
+        rate_limit_service = RateLimitService(self.session)
+        await rate_limit_service.reset_rate_limit(email)
 
         return user, token
 

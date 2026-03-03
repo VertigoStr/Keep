@@ -82,8 +82,9 @@ class TestSecurityUtils:
         payload = utils.verify_token(token)
         
         assert payload is not None
-        # Check expiration time is approximately 2 hours from now
+        # Check that the exp timestamp is approximately 2 hours from iat
+        iat = datetime.fromtimestamp(payload["iat"])
         exp = datetime.fromtimestamp(payload["exp"])
-        now = datetime.utcnow()
-        diff = exp - now
-        assert timedelta(hours=1, minutes=50) <= diff <= timedelta(hours=2, minutes=10)
+        token_lifetime = exp - iat
+        # Allow for some time variance (1.5 to 2.5 hours)
+        assert timedelta(hours=1, minutes=50) <= token_lifetime <= timedelta(hours=2, minutes=10)

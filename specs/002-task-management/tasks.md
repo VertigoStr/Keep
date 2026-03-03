@@ -29,11 +29,11 @@ description: "Task list for Task Management feature implementation"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create database migration for tasks table in alembic/versions/003_add_tasks.py
-- [ ] T002 [P] Create TaskStatus enum in src/models/task.py
-- [ ] T003 [P] Create Task SQLAlchemy model in src/models/task.py
-- [ ] T004 [P] Create Task Pydantic schemas in src/schemas/task.py
-- [ ] T005 [P] Create task validators in src/utils/task_validators.py
+- [X] T001 Create database migration for tasks table in alembic/versions/003_add_tasks.py
+- [X] T002 [P] Create TaskStatus enum in src/models/task.py
+- [X] T003 [P] Create Task SQLAlchemy model in src/models/task.py
+- [X] T004 [P] Create Task Pydantic schemas in src/schemas/task.py
+- [X] T005 [P] Create task validators in src/utils/task_validators.py
 
 ---
 
@@ -43,10 +43,10 @@ description: "Task list for Task Management feature implementation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T006 Create TaskRepository in src/repositories/task_repository.py
-- [ ] T007 [P] Create TaskService in src/services/task_service.py
-- [ ] T008 [P] Create task API router in src/api/v1/tasks.py
-- [ ] T009 Register task router in src/main.py
+- [X] T006 Create TaskRepository in src/repositories/task_repository.py
+- [X] T007 [P] Create TaskService in src/services/task_service.py
+- [X] T008 [P] Create task API router in src/api/v1/tasks.py
+- [X] T009 Register task router in src/main.py
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -62,22 +62,22 @@ description: "Task list for Task Management feature implementation"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T010 [P] [US1] Unit test for TaskRepository.create_task in tests/unit/test_task_repository.py
-- [ ] T011 [P] [US1] Unit test for TaskService.create_task in tests/unit/test_task_service.py
-- [ ] T012 [P] [US1] Integration test for POST /tasks endpoint in tests/integration/test_tasks_api.py
-- [ ] T013 [P] [US1] Contract test for POST /tasks in tests/contract/test_tasks_api_contract.py
+- [X] T010 [P] [US1] Unit test for TaskRepository.create_task in tests/unit/test_task_repository.py
+- [X] T011 [P] [US1] Unit test for TaskService.create_task in tests/unit/test_task_service.py
+- [X] T012 [P] [US1] Integration test for POST /tasks endpoint in tests/integration/test_tasks_api.py
+- [X] T013 [P] [US1] Contract test for POST /tasks in tests/contract/test_tasks_api_contract.py
 
 ### Implementation for User Story 1
 
-- [ ] T014 [US1] Implement TaskRepository.create_task method in src/repositories/task_repository.py
-- [ ] T015 [US1] Implement TaskService.create_task method in src/services/task_service.py (depends on T014)
-- [ ] T016 [US1] Implement POST /tasks endpoint in src/api/v1/tasks.py (depends on T015)
-- [ ] T017 [US1] Add validation for title (required, 1-255 chars) in src/schemas/task.py
-- [ ] T018 [US1] Add validation for description (0-5000 chars) in src/schemas/task.py
-- [ ] T019 [US1] Add validation for due_date (YYYY-MM-DD format) in src/schemas/task.py
-- [ ] T020 [US1] Add validation for status (predefined values) in src/schemas/task.py
-- [ ] T021 [US1] Add error handling for validation errors in src/api/v1/tasks.py
-- [ ] T022 [US1] Add logging for task creation in src/services/task_service.py
+- [X] T014 [US1] Implement TaskRepository.create_task method in src/repositories/task_repository.py
+- [X] T015 [US1] Implement TaskService.create_task method in src/services/task_service.py (depends on T014)
+- [X] T016 [US1] Implement POST /tasks endpoint in src/api/v1/tasks.py (depends on T015)
+- [X] T017 [US1] Add validation for title (required, 1-255 chars) in src/schemas/task.py
+- [X] T018 [US1] Add validation for description (0-5000 chars) in src/schemas/task.py
+- [X] T019 [US1] Add validation for due_date (YYYY-MM-DD format) in src/schemas/task.py
+- [X] T020 [US1] Add validation for status (predefined values) in src/schemas/task.py
+- [X] T021 [US1] Add error handling for validation errors in src/api/v1/tasks.py
+- [X] T022 [US1] Add logging for task creation in src/services/task_service.py
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -91,19 +91,19 @@ description: "Task list for Task Management feature implementation"
 
 ### Tests for User Story 2
 
-- [ ] T023 [P] [US2] Unit test for TaskRepository.get_user_tasks in tests/unit/test_task_repository.py
-- [ ] T024 [P] [US2] Unit test for TaskService.get_user_tasks in tests/unit/test_task_service.py
-- [ ] T025 [P] [US2] Integration test for GET /tasks endpoint in tests/integration/test_tasks_api.py
-- [ ] T026 [P] [US2] Contract test for GET /tasks in tests/contract/test_tasks_api_contract.py
+- [X] T023 [P] [US2] Unit test for TaskRepository.get_user_tasks in tests/unit/test_task_repository.py
+- [X] T024 [P] [US2] Unit test for TaskService.get_user_tasks in tests/unit/test_task_service.py
+- [X] T025 [P] [US2] Integration test for GET /tasks endpoint in tests/integration/test_tasks_api.py
+- [X] T026 [P] [US2] Contract test for GET /tasks in tests/contract/test_tasks_api_contract.py
 
 ### Implementation for User Story 2
 
-- [ ] T027 [US2] Implement TaskRepository.get_user_tasks method in src/repositories/task_repository.py
-- [ ] T028 [US2] Implement TaskService.get_user_tasks method in src/services/task_service.py (depends on T027)
-- [ ] T029 [US2] Implement GET /tasks endpoint in src/api/v1/tasks.py (depends on T028)
-- [ ] T030 [US2] Add ownership check to ensure user only sees their own tasks in src/services/task_service.py
-- [ ] T031 [US2] Add error handling for empty task list in src/api/v1/tasks.py
-- [ ] T032 [US2] Add logging for task list retrieval in src/services/task_service.py
+- [X] T027 [US2] Implement TaskRepository.get_user_tasks method in src/repositories/task_repository.py
+- [X] T028 [US2] Implement TaskService.get_user_tasks method in src/services/task_service.py (depends on T027)
+- [X] T029 [US2] Implement GET /tasks endpoint in src/api/v1/tasks.py (depends on T028)
+- [X] T030 [US2] Add ownership check to ensure user only sees their own tasks in src/services/task_service.py
+- [X] T031 [US2] Add error handling for empty task list in src/api/v1/tasks.py
+- [X] T032 [US2] Add logging for task list retrieval in src/services/task_service.py
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -117,28 +117,28 @@ description: "Task list for Task Management feature implementation"
 
 ### Tests for User Story 3
 
-- [ ] T033 [P] [US3] Unit test for TaskRepository.get_task_by_id in tests/unit/test_task_repository.py
-- [ ] T034 [P] [US3] Unit test for TaskRepository.update_task in tests/unit/test_task_repository.py
-- [ ] T035 [P] [US3] Unit test for TaskRepository.is_task_owner in tests/unit/test_task_repository.py
-- [ ] T036 [P] [US3] Unit test for TaskService.update_task_status in tests/unit/test_task_service.py
-- [ ] T037 [P] [US3] Integration test for GET /tasks/{task_id} endpoint in tests/integration/test_tasks_api.py
-- [ ] T038 [P] [US3] Integration test for PUT /tasks/{task_id} endpoint in tests/integration/test_tasks_api.py
-- [ ] T039 [P] [US3] Contract test for GET /tasks/{task_id} in tests/contract/test_tasks_api_contract.py
-- [ ] T040 [P] [US3] Contract test for PUT /tasks/{task_id} in tests/contract/test_tasks_api_contract.py
+- [X] T033 [P] [US3] Unit test for TaskRepository.get_task_by_id in tests/unit/test_task_repository.py
+- [X] T034 [P] [US3] Unit test for TaskRepository.update_task in tests/unit/test_task_repository.py
+- [X] T035 [P] [US3] Unit test for TaskRepository.is_task_owner in tests/unit/test_task_repository.py
+- [X] T036 [P] [US3] Unit test for TaskService.update_task_status in tests/unit/test_task_service.py
+- [X] T037 [P] [US3] Integration test for GET /tasks/{task_id} endpoint in tests/integration/test_tasks_api.py
+- [X] T038 [P] [US3] Integration test for PUT /tasks/{task_id} endpoint in tests/integration/test_tasks_api.py
+- [X] T039 [P] [US3] Contract test for GET /tasks/{task_id} in tests/contract/test_tasks_api_contract.py
+- [X] T040 [P] [US3] Contract test for PUT /tasks/{task_id} in tests/contract/test_tasks_api_contract.py
 
 ### Implementation for User Story 3
 
-- [ ] T041 [US3] Implement TaskRepository.get_task_by_id method in src/repositories/task_repository.py
-- [ ] T042 [US3] Implement TaskRepository.update_task method in src/repositories/task_repository.py
-- [ ] T043 [US3] Implement TaskRepository.is_task_owner method in src/repositories/task_repository.py
-- [ ] T044 [US3] Implement TaskService.update_task_status method in src/services/task_service.py (depends on T041, T042, T043)
-- [ ] T045 [US3] Implement GET /tasks/{task_id} endpoint in src/api/v1/tasks.py (depends on T041, T044)
-- [ ] T046 [US3] Implement PUT /tasks/{task_id} endpoint in src/api/v1/tasks.py (depends on T042, T044)
-- [ ] T047 [US3] Add ownership check for task access in src/services/task_service.py
-- [ ] T048 [US3] Add validation for status update (any status allowed) in src/schemas/task.py
-- [ ] T049 [US3] Add error handling for task not found in src/api/v1/tasks.py
-- [ ] T050 [US3] Add error handling for forbidden access in src/api/v1/tasks.py
-- [ ] T051 [US3] Add logging for task status updates in src/services/task_service.py
+- [X] T041 [US3] Implement TaskRepository.get_task_by_id method in src/repositories/task_repository.py
+- [X] T042 [US3] Implement TaskRepository.update_task method in src/repositories/task_repository.py
+- [X] T043 [US3] Implement TaskRepository.is_task_owner method in src/repositories/task_repository.py
+- [X] T044 [US3] Implement TaskService.update_task_status method in src/services/task_service.py (depends on T041, T042, T043)
+- [X] T045 [US3] Implement GET /tasks/{task_id} endpoint in src/api/v1/tasks.py (depends on T041, T044)
+- [X] T046 [US3] Implement PUT /tasks/{task_id} endpoint in src/api/v1/tasks.py (depends on T042, T044)
+- [X] T047 [US3] Add ownership check for task access in src/services/task_service.py
+- [X] T048 [US3] Add validation for status update (any status allowed) in src/schemas/task.py
+- [X] T049 [US3] Add error handling for task not found in src/api/v1/tasks.py
+- [X] T050 [US3] Add error handling for forbidden access in src/api/v1/tasks.py
+- [X] T051 [US3] Add logging for task status updates in src/services/task_service.py
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -152,19 +152,19 @@ description: "Task list for Task Management feature implementation"
 
 ### Tests for Additional Operations
 
-- [ ] T052 [P] Unit test for TaskRepository.delete_task in tests/unit/test_task_repository.py
-- [ ] T053 [P] Unit test for TaskService.delete_task in tests/unit/test_task_service.py
-- [ ] T054 [P] Integration test for DELETE /tasks/{task_id} endpoint in tests/integration/test_tasks_api.py
-- [ ] T055 [P] Contract test for DELETE /tasks/{task_id} in tests/contract/test_tasks_api_contract.py
+- [X] T052 [P] Unit test for TaskRepository.delete_task in tests/unit/test_task_repository.py
+- [X] T053 [P] Unit test for TaskService.delete_task in tests/unit/test_task_service.py
+- [X] T054 [P] Integration test for DELETE /tasks/{task_id} endpoint in tests/integration/test_tasks_api.py
+- [X] T055 [P] Contract test for DELETE /tasks/{task_id} in tests/contract/test_tasks_api_contract.py
 
 ### Implementation for Additional Operations
 
-- [ ] T056 Implement TaskRepository.delete_task method in src/repositories/task_repository.py
-- [ ] T057 Implement TaskService.delete_task method in src/services/task_service.py (depends on T056)
-- [ ] T058 Implement DELETE /tasks/{task_id} endpoint in src/api/v1/tasks.py (depends on T057)
-- [ ] T059 Add ownership check for task deletion in src/services/task_service.py
-- [ ] T060 Add error handling for delete operations in src/api/v1/tasks.py
-- [ ] T061 Add logging for task deletion in src/services/task_service.py
+- [X] T056 Implement TaskRepository.delete_task method in src/repositories/task_repository.py
+- [X] T057 Implement TaskService.delete_task method in src/services/task_service.py (depends on T056)
+- [X] T058 Implement DELETE /tasks/{task_id} endpoint in src/api/v1/tasks.py (depends on T057)
+- [X] T059 Add ownership check for task deletion in src/services/task_service.py
+- [X] T060 Add error handling for delete operations in src/api/v1/tasks.py
+- [X] T061 Add logging for task deletion in src/services/task_service.py
 
 **Checkpoint**: All CRUD operations complete
 
@@ -174,15 +174,15 @@ description: "Task list for Task Management feature implementation"
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T062 [P] Update README.md with task management API documentation
-- [ ] T063 [P] Update .env.example with any new environment variables if needed
-- [ ] T064 Run all tests and ensure 80% coverage target is met
-- [ ] T065 Run quickstart.md validation to ensure all examples work
-- [ ] T066 [P] Add docstrings to all new classes and methods
-- [ ] T067 [P] Verify PEP8 compliance with linter
-- [ ] T068 [P] Add type hints to all new functions
-- [ ] T069 Security review: verify ownership checks on all endpoints
-- [ ] T070 Performance review: verify database queries are optimized
+- [X] T062 [P] Update README.md with task management API documentation
+- [X] T063 [P] Update .env.example with any new environment variables if needed
+- [X] T064 Run all tests and ensure 80% coverage target is met
+- [X] T065 Run quickstart.md validation to ensure all examples work
+- [X] T066 [P] Add docstrings to all new classes and methods
+- [X] T067 [P] Verify PEP8 compliance with linter
+- [X] T068 [P] Add type hints to all new functions
+- [X] T069 Security review: verify ownership checks on all endpoints
+- [X] T070 Performance review: verify database queries are optimized
 
 ---
 

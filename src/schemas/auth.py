@@ -56,6 +56,7 @@ class LoginResponse(BaseModel):
     """Login response schema."""
 
     user: UserResponse
+    token: str
 
 
 class LogoutResponse(BaseModel):

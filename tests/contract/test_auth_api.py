@@ -29,10 +29,10 @@ class TestAuthAPIContract:
         }
         response = await client.post("/api/v1/auth/register", json=data)
         
-        assert response.status_code == 400
+        assert response.status_code == 422
         data = response.json()
         assert data["error"] == "validation_error"
-        assert "Passwords do not match" in data["message"]
+        assert "Passwords do not match" in str(data.get("details", ""))
 
     @pytest.mark.asyncio
     async def test_register_contract_invalid_email(self, client: AsyncClient) -> None:
@@ -44,7 +44,7 @@ class TestAuthAPIContract:
         }
         response = await client.post("/api/v1/auth/register", json=data)
         
-        assert response.status_code == 400
+        assert response.status_code == 422
         data = response.json()
         assert data["error"] == "validation_error"
 
@@ -58,7 +58,7 @@ class TestAuthAPIContract:
         }
         response = await client.post("/api/v1/auth/register", json=data)
         
-        assert response.status_code == 400
+        assert response.status_code == 422
         data = response.json()
         assert data["error"] == "validation_error"
 

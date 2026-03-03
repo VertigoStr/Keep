@@ -1,9 +1,10 @@
-# Trello Auth API
+# Trello API
 
-User Authentication and Registration API built with FastAPI, PostgreSQL, and JWT tokens.
+User Authentication and Task Management API built with FastAPI, PostgreSQL, and JWT tokens.
 
 ## Features
 
+### Authentication
 - User registration with email and password
 - Password complexity validation (8+ chars, 1 uppercase, 1 digit, 1 special char)
 - User authentication with JWT tokens
@@ -11,6 +12,15 @@ User Authentication and Registration API built with FastAPI, PostgreSQL, and JWT
 - Session management with 24-hour expiration
 - User logout
 - Get current user information
+
+### Task Management
+- Create tasks with title, description, due date, and status
+- View all tasks for authenticated user
+- View specific task details
+- Update task status and other fields
+- Delete tasks
+- Task ownership enforcement (users can only access their own tasks)
+- Predefined task statuses: "к выполнению", "в работу", "возникла проблема", "сделано", "отмена"
 
 ## Tech Stack
 
@@ -148,6 +158,125 @@ Cookie: session_token=<jwt_token>
 }
 ```
 
+#### Create a task
+
+```http
+POST /api/v1/tasks
+Content-Type: application/json
+Cookie: session_token=<jwt_token>
+
+{
+  "title": "Complete project documentation",
+  "description": "Write comprehensive documentation for the new feature",
+  "due_date": "2026-03-15",
+  "status": "к выполнению"
+}
+```
+
+**Response (201 Created)**:
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "Complete project documentation",
+  "description": "Write comprehensive documentation for the new feature",
+  "due_date": "2026-03-15",
+  "status": "к выполнению",
+  "created_at": "2026-03-02T10:00:00Z",
+  "updated_at": "2026-03-02T10:00:00Z"
+}
+```
+
+#### Get all tasks
+
+```http
+GET /api/v1/tasks
+Cookie: session_token=<jwt_token>
+```
+
+**Response (200 OK)**:
+```json
+{
+  "tasks": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "title": "Complete project documentation",
+      "description": "Write comprehensive documentation for the new feature",
+      "due_date": "2026-03-15",
+      "status": "к выполнению",
+      "created_at": "2026-03-02T10:00:00Z",
+      "updated_at": "2026-03-02T10:00:00Z"
+    }
+  ]
+}
+```
+
+#### Get a specific task
+
+```http
+GET /api/v1/tasks/{task_id}
+Cookie: session_token=<jwt_token>
+```
+
+**Response (200 OK)**:
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "Complete project documentation",
+  "description": "Write comprehensive documentation for the new feature",
+  "due_date": "2026-03-15",
+  "status": "к выполнению",
+  "created_at": "2026-03-02T10:00:00Z",
+  "updated_at": "2026-03-02T10:00:00Z"
+}
+```
+
+#### Update a task
+
+```http
+PUT /api/v1/tasks/{task_id}
+Content-Type: application/json
+Cookie: session_token=<jwt_token>
+
+{
+  "title": "Updated title",
+  "status": "в работу"
+}
+```
+
+**Response (200 OK)**:
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "Updated title",
+  "description": "Write comprehensive documentation for the new feature",
+  "due_date": "2026-03-15",
+  "status": "в работу",
+  "created_at": "2026-03-02T10:00:00Z",
+  "updated_at": "2026-03-02T11:00:00Z"
+}
+```
+
+#### Delete a task
+
+```http
+DELETE /api/v1/tasks/{task_id}
+Cookie: session_token=<jwt_token>
+```
+
+**Response (200 OK)**:
+```json
+{
+  "message": "Task deleted successfully"
+}
+```
+
+**Task Status Values**:
+- `к выполнению` - To do
+- `в работу` - In progress
+- `возникла проблема` - Has issue
+- `сделано` - Done
+- `отмена` - Cancelled
+
 ## Testing
 
 ### Run all tests
@@ -184,24 +313,30 @@ src/
 ├── models/                 # SQLAlchemy models
 │   ├── user.py            # User model
 │   ├── session.py         # Session model
-│   └── failed_login.py    # FailedLoginAttempt model
+│   ├── failed_login.py    # FailedLoginAttempt model
+│   └── task.py            # Task model
 ├── schemas/                # Pydantic schemas
-│   └── auth.py            # Auth request/response schemas
+│   ├── auth.py            # Auth request/response schemas
+│   └── task.py            # Task request/response schemas
 ├── services/               # Business logic
 │   ├── auth_service.py    # Authentication service
 │   ├── password_service.py # Password hashing
 │   ├── rate_limit_service.py # Rate limiting
-│   └── session_service.py # Session management
+│   ├── session_service.py # Session management
+│   └── task_service.py    # Task service
 ├── repositories/           # Data access layer
 │   ├── user_repository.py
 │   ├── session_repository.py
-│   └── failed_login_repository.py
+│   ├── failed_login_repository.py
+│   └── task_repository.py # Task repository
 ├── api/                    # API endpoints
 │   └── v1/
-│       └── auth.py        # Auth endpoints
+│       ├── auth.py        # Auth endpoints
+│       └── tasks.py       # Task endpoints
 ├── utils/                  # Utilities
 │   ├── security.py        # JWT utilities
 │   ├── validators.py      # Input validators
+│   ├── task_validators.py # Task validators
 │   └── logging.py         # Logging configuration
 └── middleware/             # Middleware
     ├── error_handler.py   # Error handling
@@ -210,11 +345,21 @@ src/
 tests/
 ├── conftest.py            # Pytest fixtures
 ├── unit/                  # Unit tests
+│   ├── test_task_repository.py
+│   ├── test_task_service.py
+│   └── ...
 ├── integration/           # Integration tests
+│   ├── test_tasks_api.py
+│   └── ...
 └── contract/              # Contract tests
+    ├── test_tasks_api_contract.py
+    └── ...
 
 alembic/                   # Database migrations
 └── versions/
+    ├── 001_initial.py
+    ├── 002_cleanup_jobs.py
+    └── 003_add_tasks.py   # Tasks table migration
 ```
 
 ## Security
