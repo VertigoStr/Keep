@@ -17,14 +17,14 @@ def validate_board_name(name: str) -> bool:
     Returns:
         True if name is valid, False otherwise
     """
-    if not name:
+    if not name or not name.strip():
         return False
 
     if len(name) > 255:
         return False
 
     # Allow letters, numbers, spaces and basic punctuation: .,!?-:;
-    pattern = r"^[\p{L}\p{N}\s.,!?\-:;]+$"
+    pattern = r"^[a-zA-Zа-яА-ЯёЁ0-9\s.,!?\-:;]+$"
     return re.match(pattern, name) is not None
 
 

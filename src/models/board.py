@@ -1,6 +1,6 @@
 """Board SQLAlchemy model."""
 
-from sqlalchemy import Column, String, UniqueConstraint
+from sqlalchemy import Column, String, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 from src.models import BaseModel
 
@@ -11,7 +11,7 @@ class Board(BaseModel):
     __tablename__ = "boards"
 
     name = Column(String(255), nullable=False)
-    user_id = Column(String, nullable=False, index=True)
+    user_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
 
     # Relationships
     user = relationship("User", backref="boards")

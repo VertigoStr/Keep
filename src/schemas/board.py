@@ -48,7 +48,7 @@ class BoardBase(BaseModel):
             ValueError: If name contains invalid characters
         """
         # Allow letters, numbers, spaces and basic punctuation: .,!?-:;
-        pattern = r"^[\p{L}\p{N}\s.,!?\-:;]+$"
+        pattern = r"^[a-zA-Zа-яА-ЯёЁ0-9\s.,!?\-:;]+$"
         if not re.match(pattern, v):
             raise ValueError(
                 "Название может содержать только буквы, цифры, пробелы и символы .,!?-:;"
@@ -90,6 +90,14 @@ class BoardDeleteResponse(BaseModel):
     message: str = "Board deleted successfully"
 
 
+class ErrorResponse(BaseModel):
+    """Schema for error response."""
+
+    error: str
+    message: str
+    details: Optional[dict] = None
+
+
 __all__ = [
     "ColumnResponse",
     "ColumnCreate",
@@ -98,4 +106,5 @@ __all__ = [
     "BoardResponse",
     "BoardListResponse",
     "BoardDeleteResponse",
+    "ErrorResponse",
 ]

@@ -31,7 +31,7 @@ class Task(BaseModel):
 
     # Relationships
     user = relationship("User", backref="tasks")
-    column: Optional["Column"] = relationship("Column", backref="tasks")
+    column = relationship("Column")
 
     def __repr__(self) -> str:
         """String representation of Task."""

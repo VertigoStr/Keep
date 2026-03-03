@@ -15,7 +15,7 @@ class Column(BaseModel):
     board_id = Column(String, ForeignKey("boards.id", ondelete="CASCADE"), nullable=False, index=True)
 
     # Relationships
-    tasks = relationship("Task", backref="column", cascade="all, delete-orphan")
+    tasks = relationship("Task", cascade="all, delete-orphan")
 
     # Unique constraint for board_id and order
     __table_args__ = (

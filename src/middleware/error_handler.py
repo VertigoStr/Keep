@@ -69,6 +69,13 @@ class ForbiddenError(AppError):
         super().__init__(message, "forbidden", status.HTTP_403_FORBIDDEN)
 
 
+class ConflictError(AppError):
+    """Conflict error."""
+
+    def __init__(self, message: str = "Resource conflict"):
+        super().__init__(message, "conflict", status.HTTP_409_CONFLICT)
+
+
 async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
     """Handle application errors."""
     logger.error(f"App error: {exc.error_code} - {exc.message}")

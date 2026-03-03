@@ -57,12 +57,6 @@ class BoardService:
         """
         logger.info(f"Creating board for user {user_id}: {board_data.name}")
 
-        # Check board limit (1 board per user)
-        current_count = await self.board_repository.count_by_user_id(user_id)
-        if not validate_board_limit(current_count):
-            logger.warning(f"User {user_id} exceeded board limit")
-            raise ConflictError("Достигнут лимит досок (максимум 1)")
-
         # Check for duplicate board name
         existing_board = await self.board_repository.get_by_user_id_and_name(
             user_id, board_data.name
@@ -70,6 +64,12 @@ class BoardService:
         if existing_board:
             logger.warning(f"Board name '{board_data.name}' already exists for user {user_id}")
             raise ConflictError("Доска с таким названием уже существует")
+
+        # Check board limit (1 board per user)
+        current_count = await self.board_repository.count_by_user_id(user_id)
+        if not validate_board_limit(current_count):
+            logger.warning(f"User {user_id} exceeded board limit")
+            raise ConflictError("Достигнут лимит досок (максимум 1)")
 
         # Create board
         board = await self.board_repository.create(user_id, board_data.name)
@@ -85,8 +85,12 @@ class BoardService:
         column_responses = [
             ColumnResponse.model_validate(column) for column in columns
         ]
-        return BoardResponse.model_validate(board).model_copy(
-            update={"columns": column_responses}
+        return BoardResponse(
+            id=board.id,
+            name=board.name,
+            user_id=board.user_id,
+            created_at=board.created_at,
+            columns=column_responses
         )
 
     async def list_boards(self, user_id: str) -> BoardListResponse:
@@ -118,8 +122,12 @@ class BoardService:
                 )
 
             board_responses.append(
-                BoardResponse.model_validate(board).model_copy(
-                    update={"columns": column_responses}
+                BoardResponse(
+                    id=board.id,
+                    name=board.name,
+                    user_id=board.user_id,
+                    created_at=board.created_at,
+                    columns=column_responses
                 )
             )
 
@@ -172,8 +180,12 @@ class BoardService:
             )
 
         logger.info(f"Board {board_id} retrieved successfully")
-        return BoardResponse.model_validate(board).model_copy(
-            update={"columns": column_responses}
+        return BoardResponse(
+            id=board.id,
+            name=board.name,
+            user_id=board.user_id,
+            created_at=board.created_at,
+            columns=column_responses
         )
 
     async def delete_board(self, board_id: str, user_id: str) -> None:

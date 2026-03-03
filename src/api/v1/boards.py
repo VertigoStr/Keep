@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.database import get_db
 from src.services.board_service import BoardService
-from src.utils.security import get_current_user
+from src.utils.security import get_current_user_id
 from src.schemas.board import (
     BoardCreate,
     BoardResponse,
@@ -28,7 +28,7 @@ router = APIRouter()
 async def create_board(
     board_data: BoardCreate,
     db: AsyncSession = Depends(get_db),
-    current_user_id: str = Depends(get_current_user),
+    current_user_id: str = Depends(get_current_user_id),
 ) -> BoardResponse:
     """Create a new board with predefined columns.
 
@@ -60,7 +60,7 @@ async def create_board(
 )
 async def list_boards(
     db: AsyncSession = Depends(get_db),
-    current_user_id: str = Depends(get_current_user),
+    current_user_id: str = Depends(get_current_user_id),
 ) -> BoardListResponse:
     """Get all boards for the authenticated user.
 
@@ -91,7 +91,7 @@ async def list_boards(
 async def get_board(
     board_id: str,
     db: AsyncSession = Depends(get_db),
-    current_user_id: str = Depends(get_current_user),
+    current_user_id: str = Depends(get_current_user_id),
 ) -> BoardResponse:
     """Get a specific board by ID.
 
@@ -126,7 +126,7 @@ async def get_board(
 async def delete_board(
     board_id: str,
     db: AsyncSession = Depends(get_db),
-    current_user_id: str = Depends(get_current_user),
+    current_user_id: str = Depends(get_current_user_id),
 ) -> None:
     """Delete a board and all its columns and tasks.
 

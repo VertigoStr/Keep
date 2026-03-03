@@ -131,6 +131,28 @@ async def get_current_user(
     return payload
 
 
+async def get_current_user_id(
+    request: Request,
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: AsyncSession = Depends(get_db)
+) -> str:
+    """Get current authenticated user ID from JWT token.
+
+    Args:
+        request: FastAPI request object
+        credentials: HTTP Bearer credentials
+        db: Database session
+
+    Returns:
+        User ID string
+
+    Raises:
+        UnauthorizedError: If token is invalid or session not found
+    """
+    payload = await get_current_user(request, credentials, db)
+    return payload["sub"]
+
+
 async def get_optional_user(
     request: Request,
     db: AsyncSession = Depends(get_db)
@@ -150,4 +172,4 @@ async def get_optional_user(
         return None
 
 
-__all__ = ["SecurityUtils", "get_current_user", "get_optional_user"]
+__all__ = ["SecurityUtils", "get_current_user", "get_current_user_id", "get_optional_user"]
