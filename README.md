@@ -22,6 +22,14 @@ User Authentication and Task Management API built with FastAPI, PostgreSQL, and 
 - Task ownership enforcement (users can only access their own tasks)
 - Predefined task statuses: "к выполнению", "в работу", "возникла проблема", "сделано", "отмена"
 
+### Board Management
+- Create boards with predefined columns (1 board per user limit)
+- View all boards for authenticated user
+- View specific board details with task counts per column
+- Delete boards with cascade deletion of columns and tasks
+- Board ownership enforcement (users can only access their own boards)
+- Predefined columns: "К выполнению", "В работу", "Возникла проблема", "Сделано", "Отмена"
+
 ## Tech Stack
 
 - **Language**: Python 3.11
@@ -276,6 +284,180 @@ Cookie: session_token=<jwt_token>
 - `возникла проблема` - Has issue
 - `сделано` - Done
 - `отмена` - Cancelled
+
+### Board Management
+
+#### Create a board
+
+```http
+POST /api/v1/boards
+Content-Type: application/json
+Cookie: session_token=<jwt_token>
+
+{
+  "name": "Мой проект"
+}
+```
+
+**Response (201 Created)**:
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Мой проект",
+  "user_id": "550e8400-e29b-41d4-a716-446655440000",
+  "created_at": "2026-03-02T10:00:00Z",
+  "columns": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "name": "К выполнению",
+      "order": 1,
+      "board_id": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440002",
+      "name": "В работу",
+      "order": 2,
+      "board_id": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440003",
+      "name": "Возникла проблема",
+      "order": 3,
+      "board_id": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440004",
+      "name": "Сделано",
+      "order": 4,
+      "board_id": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440005",
+      "name": "Отмена",
+      "order": 5,
+      "board_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+  ]
+}
+```
+
+#### Get all boards
+
+```http
+GET /api/v1/boards
+Cookie: session_token=<jwt_token>
+```
+
+**Response (200 OK)**:
+```json
+{
+  "boards": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "Мой проект",
+      "user_id": "550e8400-e29b-41d4-a716-446655440000",
+      "created_at": "2026-03-02T10:00:00Z",
+      "columns": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440001",
+          "name": "К выполнению",
+          "order": 1,
+          "task_count": 5
+        },
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440002",
+          "name": "В работу",
+          "order": 2,
+          "task_count": 3
+        },
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440003",
+          "name": "Возникла проблема",
+          "order": 3,
+          "task_count": 1
+        },
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440004",
+          "name": "Сделано",
+          "order": 4,
+          "task_count": 10
+        },
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440005",
+          "name": "Отмена",
+          "order": 5,
+          "task_count": 0
+        }
+      ]
+    }
+  ],
+  "total": 1
+}
+```
+
+#### Get a specific board
+
+```http
+GET /api/v1/boards/{board_id}
+Cookie: session_token=<jwt_token>
+```
+
+**Response (200 OK)**:
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Мой проект",
+  "user_id": "550e8400-e29b-41d4-a716-446655440000",
+  "created_at": "2026-03-02T10:00:00Z",
+  "columns": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "name": "К выполнению",
+      "order": 1,
+      "task_count": 5
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440002",
+      "name": "В работу",
+      "order": 2,
+      "task_count": 3
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440003",
+      "name": "Возникла проблема",
+      "order": 3,
+      "task_count": 1
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440004",
+      "name": "Сделано",
+      "order": 4,
+      "task_count": 10
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440005",
+      "name": "Отмена",
+      "order": 5,
+      "task_count": 0
+    }
+  ]
+}
+```
+
+#### Delete a board
+
+```http
+DELETE /api/v1/boards/{board_id}
+Cookie: session_token=<jwt_token>
+```
+
+**Response (204 No Content)**
+
+**Board Constraints**:
+- Maximum 1 board per user
+- Board name must be 1-255 characters
+- Board name can only contain letters, numbers, spaces and symbols: .,!?-:;
+- Board names must be unique per user
 
 ## Testing
 

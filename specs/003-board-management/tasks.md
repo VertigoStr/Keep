@@ -28,9 +28,9 @@ description: "Task list for Board Management feature implementation"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create database migration for boards table in alembic/versions/003_add_boards.py
-- [ ] T002 Create database migration for columns table in alembic/versions/004_add_columns.py
-- [ ] T003 Create database migration for adding column_id to tasks table in alembic/versions/005_add_task_column.py
+- [x] T001 Create database migration for boards table in alembic/versions/004_add_boards.py
+- [x] T002 Create database migration for columns table in alembic/versions/005_add_columns.py
+- [x] T003 Create database migration for adding column_id to tasks table in alembic/versions/006_add_task_column.py
 
 ---
 
@@ -40,16 +40,16 @@ description: "Task list for Board Management feature implementation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 [P] Create Board model in src/models/board.py
-- [ ] T005 [P] Create Column model in src/models/column.py
-- [ ] T006 Update User model to add boards relationship in src/models/user.py
-- [ ] T007 Update Task model to add column_id field and column relationship in src/models/task.py
-- [ ] T008 [P] Create BoardRepository in src/repositories/board_repository.py
-- [ ] T009 [P] Create ColumnRepository in src/repositories/column_repository.py
-- [ ] T010 [P] Create Pydantic schemas for boards in src/schemas/board.py
-- [ ] T011 [P] Create board validators in src/utils/board_validators.py
-- [ ] T012 Create BoardService in src/services/board_service.py
-- [ ] T013 Register board routes in src/api/v1/__init__.py
+- [x] T004 [P] Create Board model in src/models/board.py
+- [x] T005 [P] Create Column model in src/models/column.py
+- [x] T006 Update User model to add boards relationship in src/models/user.py
+- [x] T007 Update Task model to add column_id field and column relationship in src/models/task.py
+- [x] T008 [P] Create BoardRepository in src/repositories/board_repository.py
+- [x] T009 [P] Create ColumnRepository in src/repositories/column_repository.py
+- [x] T010 [P] Create Pydantic schemas for boards in src/schemas/board.py
+- [x] T011 [P] Create board validators in src/utils/board_validators.py
+- [x] T012 Create BoardService in src/services/board_service.py
+- [x] T013 Register board routes in src/api/v1/__init__.py
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -63,23 +63,23 @@ description: "Task list for Board Management feature implementation"
 
 ### Tests for User Story 1
 
-- [ ] T014 [P] [US1] Contract test for POST /boards in tests/contract/test_board_api.py
-- [ ] T015 [P] [US1] Unit test for BoardService.create_board in tests/unit/test_board_service.py
-- [ ] T016 [P] [US1] Unit test for board validators in tests/unit/test_board_validators.py
-- [ ] T017 [P] [US1] Unit test for BoardRepository in tests/unit/test_board_repository.py
-- [ ] T018 [P] [US1] Unit test for ColumnRepository in tests/unit/test_column_repository.py
-- [ ] T019 [US1] Integration test for board creation in tests/integration/test_board_api.py
+- [x] T014 [P] [US1] Contract test for POST /boards in tests/contract/test_board_api.py
+- [x] T015 [P] [US1] Unit test for BoardService.create_board in tests/unit/test_board_service.py
+- [x] T016 [P] [US1] Unit test for board validators in tests/unit/test_board_validators.py
+- [x] T017 [P] [US1] Unit test for BoardRepository in tests/unit/test_board_repository.py
+- [x] T018 [P] [US1] Unit test for ColumnRepository in tests/unit/test_column_repository.py
+- [x] T019 [US1] Integration test for board creation in tests/integration/test_board_api.py
 
 ### Implementation for User Story 1
 
-- [ ] T020 [US1] Implement create_board method in BoardService in src/services/board_service.py
-- [ ] T021 [US1] Implement create method in BoardRepository in src/repositories/board_repository.py
-- [ ] T022 [US1] Implement create_columns method in ColumnRepository in src/repositories/column_repository.py
-- [ ] T023 [US1] Implement POST /boards endpoint in src/api/v1/boards.py
-- [ ] T024 [US1] Add board name validation in src/utils/board_validators.py
-- [ ] T025 [US1] Add board limit check (1 board per user) in src/services/board_service.py
-- [ ] T026 [US1] Add error handling for duplicate board names in src/services/board_service.py
-- [ ] T027 [US1] Add logging for board creation operations in src/services/board_service.py
+- [x] T020 [US1] Implement create_board method in BoardService in src/services/board_service.py
+- [x] T021 [US1] Implement create method in BoardRepository in src/repositories/board_repository.py
+- [x] T022 [US1] Implement create_columns method in ColumnRepository in src/repositories/column_repository.py
+- [x] T023 [US1] Implement POST /boards endpoint in src/api/v1/boards.py
+- [x] T024 [US1] Add board name validation in src/utils/board_validators.py
+- [x] T025 [US1] Add board limit check (1 board per user) in src/services/board_service.py
+- [x] T026 [US1] Add error handling for duplicate board names in src/services/board_service.py
+- [x] T027 [US1] Add logging for board creation operations in src/services/board_service.py
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -93,17 +93,17 @@ description: "Task list for Board Management feature implementation"
 
 ### Tests for User Story 2
 
-- [ ] T028 [P] [US2] Contract test for GET /boards in tests/contract/test_board_api.py
-- [ ] T029 [P] [US2] Unit test for BoardService.list_boards in tests/unit/test_board_service.py
-- [ ] T030 [US2] Integration test for listing boards in tests/integration/test_board_api.py
+- [x] T028 [P] [US2] Contract test for GET /boards in tests/contract/test_board_api.py
+- [x] T029 [P] [US2] Unit test for BoardService.list_boards in tests/unit/test_board_service.py
+- [x] T030 [US2] Integration test for listing boards in tests/integration/test_board_api.py
 
 ### Implementation for User Story 2
 
-- [ ] T031 [US2] Implement list_boards method in BoardService in src/services/board_service.py
-- [ ] T032 [US2] Implement get_by_user_id method in BoardRepository in src/repositories/board_repository.py
-- [ ] T033 [US2] Implement GET /boards endpoint in src/api/v1/boards.py
-- [ ] T034 [US2] Add task count aggregation for columns in src/repositories/board_repository.py
-- [ ] T035 [US2] Add logging for board listing operations in src/services/board_service.py
+- [x] T031 [US2] Implement list_boards method in BoardService in src/services/board_service.py
+- [x] T032 [US2] Implement get_by_user_id method in BoardRepository in src/repositories/board_repository.py
+- [x] T033 [US2] Implement GET /boards endpoint in src/api/v1/boards.py
+- [x] T034 [US2] Add task count aggregation for columns in src/repositories/board_repository.py
+- [x] T035 [US2] Add logging for board listing operations in src/services/board_service.py
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -117,17 +117,17 @@ description: "Task list for Board Management feature implementation"
 
 ### Tests for User Story 3
 
-- [ ] T036 [P] [US3] Contract test for DELETE /boards/{id} in tests/contract/test_board_api.py
-- [ ] T037 [P] [US3] Unit test for BoardService.delete_board in tests/unit/test_board_service.py
-- [ ] T038 [US3] Integration test for board deletion in tests/integration/test_board_api.py
+- [x] T036 [P] [US3] Contract test for DELETE /boards/{id} in tests/contract/test_board_api.py
+- [x] T037 [P] [US3] Unit test for BoardService.delete_board in tests/unit/test_board_service.py
+- [x] T038 [US3] Integration test for board deletion in tests/integration/test_board_api.py
 
 ### Implementation for User Story 3
 
-- [ ] T039 [US3] Implement delete_board method in BoardService in src/services/board_service.py
-- [ ] T040 [US3] Implement delete method in BoardRepository in src/repositories/board_repository.py
-- [ ] T041 [US3] Implement DELETE /boards/{id} endpoint in src/api/v1/boards.py
-- [ ] T042 [US3] Add ownership check before deletion in src/services/board_service.py
-- [ ] T043 [US3] Add logging for board deletion operations in src/services/board_service.py
+- [x] T039 [US3] Implement delete_board method in BoardService in src/services/board_service.py
+- [x] T040 [US3] Implement delete method in BoardRepository in src/repositories/board_repository.py
+- [x] T041 [US3] Implement DELETE /boards/{id} endpoint in src/api/v1/boards.py
+- [x] T042 [US3] Add ownership check before deletion in src/services/board_service.py
+- [x] T043 [US3] Add logging for board deletion operations in src/services/board_service.py
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -141,16 +141,16 @@ description: "Task list for Board Management feature implementation"
 
 ### Tests for Get Board
 
-- [ ] T044 [P] Contract test for GET /boards/{id} in tests/contract/test_board_api.py
-- [ ] T045 [P] Unit test for BoardService.get_board in tests/unit/test_board_service.py
-- [ ] T046 Integration test for getting board by ID in tests/integration/test_board_api.py
+- [x] T044 [P] Contract test for GET /boards/{id} in tests/contract/test_board_api.py
+- [x] T045 [P] Unit test for BoardService.get_board in tests/unit/test_board_service.py
+- [x] T046 Integration test for getting board by ID in tests/integration/test_board_api.py
 
 ### Implementation for Get Board
 
-- [ ] T047 Implement get_board method in BoardService in src/services/board_service.py
-- [ ] T048 Implement get_by_id method in BoardRepository in src/repositories/board_repository.py
-- [ ] T049 Implement GET /boards/{id} endpoint in src/api/v1/boards.py
-- [ ] T050 Add ownership check for get_board in src/services/board_service.py
+- [x] T047 Implement get_board method in BoardService in src/services/board_service.py
+- [x] T048 Implement get_by_id method in BoardRepository in src/repositories/board_repository.py
+- [x] T049 Implement GET /boards/{id} endpoint in src/api/v1/boards.py
+- [x] T050 Add ownership check for get_board in src/services/board_service.py
 
 **Checkpoint**: All API endpoints are now functional
 
@@ -160,14 +160,14 @@ description: "Task list for Board Management feature implementation"
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T051 [P] Update README.md with board management API documentation
-- [ ] T052 [P] Update .roo/rules/specify-rules.md with board management technologies
-- [ ] T053 Run all tests and ensure 80% coverage target is met
-- [ ] T054 Run quickstart.md validation to ensure all examples work
-- [ ] T055 Add API documentation for board endpoints in src/api/v1/boards.py
-- [ ] T056 Performance optimization for board listing queries
-- [ ] T057 Security review for board ownership checks
-- [ ] T058 Code cleanup and refactoring
+- [x] T051 [P] Update README.md with board management API documentation
+- [x] T052 [P] Update .roo/rules/specify-rules.md with board management technologies
+- [x] T053 Run all tests and ensure 80% coverage target is met
+- [x] T054 Run quickstart.md validation to ensure all examples work
+- [x] T055 Add API documentation for board endpoints in src/api/v1/boards.py
+- [x] T056 Performance optimization for board listing queries
+- [x] T057 Security review for board ownership checks
+- [x] T058 Code cleanup and refactoring
 
 ---
 

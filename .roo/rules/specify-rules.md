@@ -1,6 +1,6 @@
 # src Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-03-02
+Auto-generated from all feature plans. Last updated: 2026-03-03
 
 ## Active Technologies
 - Python 3.11 + FastAPI, SQLAlchemy, Pydantic (002-task-management)

@@ -93,9 +93,10 @@ async def health_check() -> dict:
 
 
 # Include API routers
-from src.api.v1 import auth, tasks
+from src.api.v1 import auth, tasks, boards
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["auth"])
 app.include_router(tasks.router, prefix="/api/v1", tags=["tasks"])
+app.include_router(boards.router, prefix="/api/v1", tags=["boards"])
 
 
 if __name__ == "__main__":
